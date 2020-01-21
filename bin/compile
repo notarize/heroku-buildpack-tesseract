@@ -8,7 +8,7 @@ REPO_DIR=$BUILD_DIR/package_repo/tesseract
 echo "-----> creating local tesseract $TESSERACT_VERSION repo in $REPO_DIR from $ARCHIVE_REMOTE"
 
 mkdir -p $REPO_DIR
-curl -s $ARCHIVE_REMOTE | tar xvf -C $REPO_DIR
+curl -s $ARCHIVE_REMOTE | tar xz -C $REPO_DIR
 
 echo "       adding local tesseract $TESSERACT_VERSION repo to source list"
 
