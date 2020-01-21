@@ -3,8 +3,11 @@
 BUILD_DIR=$1
 TESSERACT_VERSION=4.1.1
 ARCHIVE_REMOTE=https://notarize-dev-static-assets.s3.amazonaws.com/lib/tesseract-$TESSERACT_VERSION.tar.gz
-REPO_DIR=$BUILD_DIR/package_repo/tesseract
-SOURCES=$BUILD_DIR/sources.list
+REPO_DIR=$BUILD_DIR/tesseract
+APT_CACHE_DIR=$BUILD_DIR/apt/cache
+APT_STATE_DIR=$BUILD_DIR/apt/state
+APT_SOURCES_DIR=$BUILD_DIR/apt/sources
+APT_SOURCES=$APT_SOURCES_DIR/sources.list
 
 echo "-----> creating local tesseract $TESSERACT_VERSION repo in $REPO_DIR from $ARCHIVE_REMOTE"
 
@@ -13,6 +16,9 @@ curl -s $ARCHIVE_REMOTE | tar xz -C $REPO_DIR
 
 echo "       adding local tesseract $TESSERACT_VERSION repo to source list"
 
+mkdir -p $APT_CACHE_DIR/archives/partial
+mkdir -p $APT_STATE_DIR/lists/partial
+mkdir -p $APT_SOURCES_DIR
 cat "/etc/apt/sources.list" > $SOURCES
 echo "deb file:$REPO_DIR ./" >> $SOURCES
 apt-get update -o dir::etc::sourcelist=$SOURCES
