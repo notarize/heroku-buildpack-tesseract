@@ -21,7 +21,7 @@ mkdir -p $APT_STATE_DIR/lists/partial
 mkdir -p $APT_SOURCES_DIR
 cat "/etc/apt/sources.list" > $SOURCES
 echo "deb file:$REPO_DIR ./" >> $SOURCES
-apt-get update -o dir::etc::sourcelist=$SOURCES
+apt-get update -o dir::cache=$APT_CACHE_DIR -o dir::state=$APT_STATE_DIR -o dir::etc::sourcelist=$SOURCES
 
 echo "       installing tesseract $TESSERACT_VERSION from local repo"
 
