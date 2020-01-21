@@ -25,6 +25,7 @@ apt-get update -o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::sta
 
 echo "       installing tesseract $TESSERACT_VERSION from local repo"
 
+apt-cache policy tesseract-ocr
 apt-get install -y tesseract-ocr
 
 echo "       removing local tesseract $TESSERACT_VERSION repo from source list"
