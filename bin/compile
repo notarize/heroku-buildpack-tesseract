@@ -1,5 +1,6 @@
 #!/bin/bash
 
+BUILD_DIR=$1
 ENV_DIR=$3
 ENVSCRIPT=$BUILD_DIR/.profile.d/tesseract.sh
 
