@@ -4,7 +4,7 @@ echo "-----> fixing LD_LIBRARY_PATH"
 export LD_LIBRARY_PATH="/app/.apt/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH"
 
 echo "       checking tesseract version"
-if ./somecommand | grep -q $TESSERACT_VERSION
+if tesseract -v | grep -q $TESSERACT_VERSION
 then
   echo "       version $TESSERACT_VERSION found"
 else
