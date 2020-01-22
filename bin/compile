@@ -7,5 +7,3 @@ ENVSCRIPT=$BUILD_DIR/.profile.d/tesseract.sh
 echo "-----> adding .apt/lib/x86_64-linux-gnu to LD_LIBRARY_PATH for tesseract"
 mkdir -p $BUILD_DIR/.profile.d
 echo "export LD_LIBRARY_PATH=\"\$HOME/.apt/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH\"" > $ENVSCRIPT
-TESSDATA_PREFIX=$(realpath $(find -iname tessdata))
-echo "export TESSDATA_PREFIX=\"\$HOME/.apt/usr/share/tesseract-ocr/4.00/tessdata=\"" >> $ENVSCRIPT
