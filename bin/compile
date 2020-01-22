@@ -1,23 +1,10 @@
 #!/bin/bash
 
 ENV_DIR=$3
-TESSERACT_VERSION=$(cat $ENV_DIR/TESSERACT_VERSION)
 ENVSCRIPT=$BUILD_DIR/.profile.d/tesseract.sh
 
-export TESSDATA_PREFIX=$(cat $ENV_DIR/TESSDATA_PREFIX)
-
 echo "-----> adding .apt/lib/x86_64-linux-gnu to LD_LIBRARY_PATH for tesseract"
-export LD_LIBRARY_PATH="$BUILD_DIR/.apt/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH"
 mkdir -p $BUILD_DIR/.profile.d
 echo "export LD_LIBRARY_PATH=\"\$HOME/.apt/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH\"" > $ENVSCRIPT
-
-echo "       checking tesseract version"
-TESSERACT_VERSION_OUTPUT="$(tesseract -v)"
-if "$TESSERACT_VERSION_OUTPUT" | grep -q $TESSERACT_VERSION
-then
-  echo "       version $TESSERACT_VERSION found"
-else
-  echo "       version $TESSERACT_VERSION not found"
-  echo "       $TESSERACT_VERSION_OUTPUT"
-  exit 1
-fi
+TESSDATA_PREFIX=$(realpath $(find -iname tessdata))
+echo "export TESSDATA_PREFIX=\"$TESSDATA_PREFIX=\"" >> $ENVSCRIPT
