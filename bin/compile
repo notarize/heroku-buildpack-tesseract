@@ -6,8 +6,9 @@ TESSERACT_VERSION=$(cat $ENV_DIR/TESSERACT_VERSION)
 echo "-----> adding /app/.apt/lib/x86_64-linux-gnu to LD_LIBRARY_PATH for tesseract"
 export LD_LIBRARY_PATH="/app/.apt/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH"
 
-TESSERACT_VERSION_OUTPUT="$(tesseract -v)"
 echo "       checking tesseract version"
+export TESSDATA_PREFIX=$(cat $ENV_DIR/TESSDATA_PREFIX)
+TESSERACT_VERSION_OUTPUT="$(tesseract -v)"
 if $TESSERACT_VERSION_OUTPUT | grep -q $TESSERACT_VERSION
 then
   echo "       version $TESSERACT_VERSION found"
