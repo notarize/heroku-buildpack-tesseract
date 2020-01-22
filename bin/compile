@@ -1,6 +1,9 @@
 #!/bin/bash
 
-echo "-----> fixing LD_LIBRARY_PATH"
+ENV_DIR=$3
+TESSERACT_VERSION=$(cat $ENV_DIR/TESSERACT_VERSION)
+
+echo "-----> adding /app/.apt/lib/x86_64-linux-gnu to LD_LIBRARY_PATH for tesseract"
 export LD_LIBRARY_PATH="/app/.apt/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH"
 
 TESSERACT_VERSION_OUTPUT="$(tesseract -v)"
